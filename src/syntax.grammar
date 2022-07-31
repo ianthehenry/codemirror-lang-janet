@@ -2,25 +2,50 @@
 
 @skip { space | LineComment }
 
+Form { "(" expression* ")" }
+Tuple { "[" expression* "]" }
+Struct { "{" expression* "}" }
+Array { "@[" expression* "]" }
+Table { "@{" expression* "}" }
+
 expression {
-  Identifier |
+  Identifier { identifier } |
+  Number { number }|
+  Boolean { @specialize<identifier, "true" | "false"> } |
+  Nil { @specialize<identifier, "nil"> } |
   String |
-  Boolean |
-  Application { "(" expression* ")" }
+  Symbol |
+  Form | Tuple | Struct | Array | Table
 }
 
 @tokens {
-  Identifier { $[a-zA-Z_\-0-9]+ }
+  // identifiers can't start with : or a number
+  leading-identifier { $[a-zA-Z!$&*+\-./<=>@^_|]+ }
+  // but they can contain them
+  interior-identifier { $[a-zA-Z0-9!$&*+\-./:<=>@^_|]+ }
+  identifier { leading-identifier interior-identifier? }
+
+  number-initial { $[0-9+\-.]+ }
+  number-leading { $[0-9+\-.]+ }
+  number { number-initial number-leading? }
 
   String { '"' (!["\\] | "\\" _)* '"' }
 
-  Boolean { "#t" | "#f" }
+  // note that symbols *can* start with a number
+  Symbol { ":" interior-identifier }
 
-  LineComment { ";" ![\n]* }
+  LineComment { "#" ![\n]* }
 
   space { $[ \t\n\r]+ }
 
   "(" ")"
+  "[" "]"
+  "{" "}"
+  "@{"
+  "@["
+  @precedence {"@{", identifier}
+  @precedence {"@[", identifier}
+  @precedence {number, identifier}
 }
 
 @detectDelim

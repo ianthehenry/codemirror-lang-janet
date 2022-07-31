@@ -1,20 +1,52 @@
 # Booleans
 
-#t
-#f
+true
+false
 
 ==>
 
 Program(Boolean, Boolean)
 
-# Identifiers
+# Symbols
 
-one
-Two_Three
+:hi
+:by-e
+:h:i
+:123
 
 ==>
 
-Program(Identifier, Identifier)
+Program(Symbol, Symbol, Symbol, Symbol)
+
+# Identifiers
+
+one
+o:ne
+a-zA-Z0-9!$&*+-./:<=>@^_|
+
+==>
+
+Program(Identifier, Identifier, Identifier)
+
+# Ambiguities
+
++1
++1a
+a+1
+-1
+a-1
+
+==>
+
+Program(Number, Identifier, Identifier, Number, Identifier)
+
+# Compound
+
+[{:a 1} {:a 2}]
+
+==>
+
+Program(Tuple(Struct(Symbol, Number), Struct(Symbol, Number)))
 
 # Strings
 
@@ -28,14 +60,14 @@ Program(String, String)
 # Applications
 
 (begin
-  (when #t
+  (when true
     (print (concat "hello" " " "world")))
   (print "DONE"))
 
 ==>
 
-Program(Application(
+Program(Form(
   Identifier,
-  Application(Identifier, Boolean, Application(
-    Identifier, Application(Identifier, String, String, String)))
-  Application(Identifier, String)))
+  Form(Identifier, Boolean, Form(
+    Identifier, Form(Identifier, String, String, String)))
+  Form(Identifier, String)))
