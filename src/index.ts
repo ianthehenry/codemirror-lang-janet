@@ -34,7 +34,10 @@ export const JanetLanguage = LRLanguage.define({
     ]
   }),
   languageData: {
-    commentTokens: {line: "#"}
+    commentTokens: { line: "#" },
+    closeBrackets: {
+      brackets: ['(', '[', '{', '"', '`']
+    },
   }
 })
 
