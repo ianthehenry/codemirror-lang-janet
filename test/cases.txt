@@ -7,7 +7,7 @@ false
 
 Program(Boolean, Boolean)
 
-# Symbols
+# Keywords
 
 :hi
 :by-e
@@ -16,7 +16,7 @@ Program(Boolean, Boolean)
 
 ==>
 
-Program(Symbol, Symbol, Symbol, Symbol)
+Program(Keyword, Keyword, Keyword, Keyword)
 
 # Identifiers
 
@@ -46,7 +46,7 @@ Program(Number, Identifier, Identifier, Number, Identifier)
 
 ==>
 
-Program(Tuple(Struct(Symbol, Number), Struct(Symbol, Number)))
+Program(Tuple(Struct(Keyword, Number), Struct(Keyword, Number)))
 
 # Strings
 

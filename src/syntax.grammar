@@ -14,7 +14,7 @@ expression {
   Boolean { @specialize<identifier, "true" | "false"> } |
   Nil { @specialize<identifier, "nil"> } |
   String |
-  Symbol |
+  Keyword |
   Form | Tuple | Struct | Array | Table
 }
 
@@ -31,8 +31,8 @@ expression {
 
   String { '"' (!["\\] | "\\" _)* '"' }
 
-  // note that symbols *can* start with a number
-  Symbol { ":" interior-identifier }
+  // note that keywords *can* start with a number
+  Keyword { ":" interior-identifier }
 
   LineComment { "#" ![\n]* }
 

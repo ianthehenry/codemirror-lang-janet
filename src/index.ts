@@ -26,7 +26,7 @@ export const JanetLanguage = LRLanguage.define({
         String: t.string,
         LineComment: t.lineComment,
         Nil: t.null,
-        Symbol: t.atom,
+        Keyword: t.atom,
         "( )": t.paren,
         "@[ [ ]": t.squareBracket,
         "@{ { }": t.brace,
