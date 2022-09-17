@@ -30,6 +30,8 @@ export const JanetLanguage = LRLanguage.define({
         "( )": t.paren,
         "@[ [ ]": t.squareBracket,
         "@{ { }": t.brace,
+        "Pipe Comma Semicolon Quote Quasiquote": t.punctuation,
+        Special: t.keyword,
       })
     ]
   }),

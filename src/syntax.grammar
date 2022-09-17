@@ -13,16 +13,39 @@ expression {
   Number { number } |
   Boolean { @specialize<identifier, "true" | "false"> } |
   Nil { @specialize<identifier, "nil"> } |
+  Special {
+    @specialize<identifier,
+    "import" | "import*" | "use" |
+    "let" |
+    "with" | "with-dyns" | "with-syms" | "with-vars" |
+    "default" |
+    "set" | "setdyn" |
+    "var" | "var-" | "varfn" | "varglobal" |
+    "def" | "def-" | "defdyn" | "defglobal" |
+    "defn" | "defn-" |
+    "fn" | "short-fn" |
+    "defmacro" | "defmacro-" |
+    "if" | "if-let" | "if-with" |
+    "when" | "when-let" | "when-with" |
+    "unless" | "cond" |
+    "case" | "match" |
+    "while" | "for" | "seq" | "each" |
+    "try" |
+    "label" | "return" |
+    "macex" | "macex1"
+    >
+  } |
   String |
+  Pipe | Comma | Semicolon | Quote | Quasiquote |
   Keyword |
   Form | Tuple | Struct | Array | Table
 }
 
 @tokens {
   // identifiers can't start with : or a number
-  leading-identifier { $[a-zA-Z!$&*+\-./<=>@^_|]+ }
+  leading-identifier { $[a-zA-Z!$&*+\-./<=>@^_]+ }
   // but they can contain them
-  interior-identifier { $[a-zA-Z0-9!$&*+\-./:<=>@^_|]+ }
+  interior-identifier { $[a-zA-Z0-9!$&*+\-./:<=>@^_]+ }
   identifier { leading-identifier interior-identifier? }
 
   number { $[+-]? (@digit+ ("." @digit*)? | "." @digit+) }
@@ -31,6 +54,12 @@ expression {
 
   // note that keywords *can* start with a number
   Keyword { ":" interior-identifier }
+
+  Pipe { "|" }
+  Comma { "," }
+  Semicolon { ";" }
+  Quasiquote { "~" }
+  Quote { "'" }
 
   LineComment { "#" ![\n]* }
 

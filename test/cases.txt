@@ -22,7 +22,7 @@ Program(Keyword, Keyword, Keyword, Keyword)
 
 one
 o:ne
-a-zA-Z0-9!$&*+-./:<=>@^_|
+a-zA-Z0-9!$&*+-./:<=>@^_
 
 ==>
 
@@ -99,6 +99,27 @@ Program(String, String)
 
 Program(Form(
   Identifier,
-  Form(Identifier, Boolean, Form(
+  Form(Special, Boolean, Form(
     Identifier, Form(Identifier, String, String, String)))
   Form(Identifier, String)))
+
+# Specials
+
+(if true
+  (print "hello")
+  (print "DONE"))
+
+==>
+
+Program(Form(
+  Special, Boolean
+  Form(Identifier, String)
+  Form(Identifier, String)))
+
+# Pipe
+
+(foo | bar)
+
+==>
+
+Program(Form(Identifier, Pipe, Identifier))
