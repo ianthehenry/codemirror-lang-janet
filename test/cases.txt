@@ -28,6 +28,37 @@ a-zA-Z0-9!$&*+-./:<=>@^_|
 
 Program(Identifier, Identifier, Identifier)
 
+# Numbers
+
++
+-
++.
+-.
+.
+-.0
++.0
+.0
+0.
++1.0
+-10.
+10.12
+
+==>
+
+Program(
+  Identifier,
+  Identifier,
+  Identifier,
+  Identifier,
+  Identifier,
+  Number,
+  Number,
+  Number,
+  Number,
+  Number,
+  Number,
+  Number)
+
 # Ambiguities
 
 +1

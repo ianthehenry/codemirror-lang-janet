@@ -10,7 +10,7 @@ Table { "@{" expression* "}" }
 
 expression {
   Identifier { identifier } |
-  Number { number }|
+  Number { number } |
   Boolean { @specialize<identifier, "true" | "false"> } |
   Nil { @specialize<identifier, "nil"> } |
   String |
@@ -25,9 +25,7 @@ expression {
   interior-identifier { $[a-zA-Z0-9!$&*+\-./:<=>@^_|]+ }
   identifier { leading-identifier interior-identifier? }
 
-  number-initial { $[0-9+\-.]+ }
-  number-leading { $[0-9+\-.]+ }
-  number { number-initial number-leading? }
+  number { $[+-]? (@digit+ ("." @digit*)? | "." @digit+) }
 
   String { '"' (!["\\] | "\\" _)* '"' }
 
