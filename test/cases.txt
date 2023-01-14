@@ -62,14 +62,15 @@ Program(
 # Ambiguities
 
 +1
-+1a
-a+1
 -1
+a+1
 a-1
++1a
+-1a
 
 ==>
 
-Program(Number, Identifier, Identifier, Number, Identifier)
+Program(Number, Number, Identifier, Identifier, Identifier, Identifier)
 
 # Compound
 
@@ -83,10 +84,14 @@ Program(Tuple(Struct(Keyword, Number), Struct(Keyword, Number)))
 
 "hello"
 "one\"\\two"
+`hello world`
+`hello "world`
+"hello `world"
+``hello `world``
 
 ==>
 
-Program(String, String)
+Program(String, String, String, String, String, String)
 
 # Applications
 

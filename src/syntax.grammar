@@ -9,7 +9,7 @@ Array { "@[" expression* "]" }
 Table { "@{" expression* "}" }
 
 expression {
-  Identifier { identifier } |
+  Identifier { identifier | illegalIdentifier } |
   Number { number } |
   Boolean { @specialize<identifier, "true" | "false"> } |
   Nil { @specialize<identifier, "nil"> } |
@@ -41,19 +41,27 @@ expression {
   Form | Tuple | Struct | Array | Table
 }
 
+@external tokens backtickString from "./tokens" { backtickQuotedString }
+String { doubleQuotedString | backtickQuotedString }
+
 @tokens {
   // identifiers can't start with : or a number
-  leading-identifier { $[a-zA-Z!$&*+\-./<=>@^_]+ }
+  leadingIdentifier { $[a-zA-Z!$&*+\-./<=>@^_]+ }
   // but they can contain them
-  interior-identifier { $[a-zA-Z0-9!$&*+\-./:<=>@^_]+ }
-  identifier { leading-identifier interior-identifier? }
+  interiorIdentifier { $[a-zA-Z0-9!$&*+\-./:<=>@^_]+ }
+  identifier { leadingIdentifier interiorIdentifier? }
 
   number { $[+-]? (@digit+ ("." @digit*)? | "." @digit+) }
 
-  String { '"' (!["\\] | "\\" _)* '"' }
+  // everything except dot, to prevent ambiguity
+  transitionIdentifier { $[a-zA-Z!$&*+\-/<=>@^_]+ }
+
+  illegalIdentifier { number transitionIdentifier interiorIdentifier? }
+
+  doubleQuotedString { '"' (!["\\] | "\\" _)* '"' }
 
   // note that keywords *can* start with a number
-  Keyword { ":" interior-identifier }
+  Keyword { ":" interiorIdentifier }
 
   Pipe { "|" }
   Comma { "," }
@@ -72,7 +80,10 @@ expression {
   "@["
   @precedence {"@{", identifier}
   @precedence {"@[", identifier}
+  @precedence {illegalIdentifier, identifier}
+  @precedence {illegalIdentifier, number}
   @precedence {number, identifier}
 }
 
 @detectDelim
+
