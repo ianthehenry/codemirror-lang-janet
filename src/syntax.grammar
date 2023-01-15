@@ -29,8 +29,8 @@ expression {
     "when" | "when-let" | "when-with" |
     "unless" | "cond" |
     "case" | "match" |
-    "while" | "for" | "break" |
-    "forv" | "loop" | "seq" | "tabseq" | "generate" |
+    "while" | "for" | "forv" | "break" |
+    "loop" | "seq" | "tabseq" | "generate" |
     "each" | "eachk" | "eachp" |
     "coro" | "yield" |
     "try" |
@@ -49,9 +49,9 @@ String { doubleQuotedString | backtickQuotedString }
 
 @tokens {
   // identifiers can't start with : or a number
-  leadingIdentifier { $[a-zA-Z!$&*+\-./<=>@^_]+ }
+  leadingIdentifier { $[a-zA-Z!?$&*+\-./<=>@^_]+ }
   // but they can contain them
-  interiorIdentifier { $[a-zA-Z0-9!$&*+\-./:<=>@^_]+ }
+  interiorIdentifier { $[a-zA-Z0-9!?$&*+\-./:<=>@^_]+ }
   identifier { leadingIdentifier interiorIdentifier? }
 
   number { $[+-]? (@digit+ ("." @digit*)? | "." @digit+) }

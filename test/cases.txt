@@ -121,6 +121,18 @@ Program(Form(
   Form(Identifier, String)
   Form(Identifier, String)))
 
+# Identifiers
+
+true?
+true+
+_true
+_
+nil-
+
+==>
+
+Program(Identifier, Identifier, Identifier, Identifier, Identifier)
+
 # Pipe
 
 (foo | bar)
