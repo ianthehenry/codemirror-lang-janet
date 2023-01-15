@@ -25,11 +25,14 @@ expression {
     "defn" | "defn-" |
     "fn" | "short-fn" |
     "defmacro" | "defmacro-" |
-    "if" | "if-let" | "if-with" |
+    "if" | "if-not" | "if-let" | "if-with" |
     "when" | "when-let" | "when-with" |
     "unless" | "cond" |
     "case" | "match" |
-    "while" | "for" | "seq" | "each" |
+    "while" | "for" | "break" |
+    "forv" | "loop" | "seq" | "tabseq" | "generate" |
+    "each" | "eachk" | "eachp" |
+    "coro" | "yield" |
     "try" |
     "label" | "return" |
     "macex" | "macex1"
