@@ -13,10 +13,11 @@ Program(Boolean, Boolean)
 :by-e
 :h:i
 :123
+:
 
 ==>
 
-Program(Keyword, Keyword, Keyword, Keyword)
+Program(Keyword, Keyword, Keyword, Keyword, Keyword)
 
 # Identifiers
 
@@ -59,18 +60,54 @@ Program(
   Number,
   Number)
 
+# Incorrect ambiguities that I can't fix
+
++1a
+-1a
++1e
+1_1e1
+1e_1
+1e1_1
+
+==>
+
+Program(Number,Identifier,Number,Identifier,Number,Identifier,Number,Number,Identifier,Number,Identifier)
+
 # Ambiguities
 
 +1
 -1
 a+1
 a-1
-+1a
--1a
 
 ==>
 
-Program(Number, Number, Identifier, Identifier, Identifier, Identifier)
+Program(Number, Number, Identifier, Identifier)
+
+# Underscore Numbers
+
+1_
+1_1
+_1
+_.1
+1_.1
+1_._1
+._1
+.1_
+
+==>
+
+Program(Number, Number, Identifier, Identifier, Number, Number, Identifier, Number)
+
+# Scientific notation
+
+1e1
+1_e1
+_1e1
+
+==>
+
+Program(Number, Number, Identifier)
 
 # Compound
 
