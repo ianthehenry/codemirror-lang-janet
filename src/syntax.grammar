@@ -55,7 +55,7 @@ String { doubleQuotedString | backtickQuotedString }
   identifier { leadingIdentifier interiorIdentifier* }
 
   janetDigit { @digit | "_" }
-  number { $[+-]? (@digit janetDigit* ("." janetDigit*)? | "." @digit janetDigit*) ("e" @digit+)? }
+  number { $[+-]? ("0x")? (@digit janetDigit* ("." janetDigit*)? | "." @digit janetDigit*) ("e" @digit+)? }
 
   doubleQuotedString { ('"' | '@"') (!["\\] | "\\" _)* '"' }
 

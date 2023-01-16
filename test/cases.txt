@@ -43,6 +43,7 @@ Program(Identifier, Identifier, Identifier)
 +1.0
 -10.
 10.12
+0x10
 
 ==>
 
@@ -58,7 +59,9 @@ Program(
   Number,
   Number,
   Number,
-  Number)
+  Number,
+  Number
+  )
 
 # Incorrect ambiguities that I can't fix
 
