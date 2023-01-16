@@ -120,6 +120,8 @@ Program(Tuple(Struct(Keyword, Number), Struct(Keyword, Number)))
 # Strings
 
 "hello"
+@"hello"
+@`hello`
 "one\"\\two"
 `hello world`
 `hello "world`
@@ -128,7 +130,7 @@ Program(Tuple(Struct(Keyword, Number), Struct(Keyword, Number)))
 
 ==>
 
-Program(String, String, String, String, String, String)
+Program(String, String, String, String, String, String, String, String)
 
 # Applications
 
@@ -165,10 +167,12 @@ true+
 _true
 _
 nil-
+@foo
+@
 
 ==>
 
-Program(Identifier, Identifier, Identifier, Identifier, Identifier)
+Program(Identifier, Identifier, Identifier, Identifier, Identifier, Identifier, Identifier)
 
 # Pipe
 

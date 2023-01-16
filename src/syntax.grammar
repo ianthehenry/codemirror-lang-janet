@@ -57,7 +57,7 @@ String { doubleQuotedString | backtickQuotedString }
   janetDigit { @digit | "_" }
   number { $[+-]? (@digit janetDigit* ("." janetDigit*)? | "." @digit janetDigit*) ("e" @digit+)? }
 
-  doubleQuotedString { '"' (!["\\] | "\\" _)* '"' }
+  doubleQuotedString { ('"' | '@"') (!["\\] | "\\" _)* '"' }
 
   // note that keywords *can* start with a number
   Keyword { ":" interiorIdentifier* }
@@ -77,6 +77,7 @@ String { doubleQuotedString | backtickQuotedString }
   "{" "}"
   "@{"
   "@["
+  @precedence {doubleQuotedString, identifier}
   @precedence {"@{", identifier}
   @precedence {"@[", identifier}
   @precedence {number, identifier}
