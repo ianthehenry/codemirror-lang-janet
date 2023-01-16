@@ -54,8 +54,12 @@ String { doubleQuotedString | backtickQuotedString }
   interiorIdentifier { $[a-zA-Z0-9!?$&*+\-./:<=>@^_] }
   identifier { leadingIdentifier interiorIdentifier* }
 
-  janetDigit { @digit | "_" }
-  number { $[+-]? ("0x")? (@digit janetDigit* ("." janetDigit*)? | "." @digit janetDigit*) ("e" @digit+)? }
+  underDigit { @digit | "_" }
+  hexDigit { @digit | $[a-fA-F] }
+  underHexDigit { hexDigit | "_" }
+  decimalNumber { $[+-]? (@digit underDigit* ("." underDigit*)? | "." @digit underDigit*) ("e" @digit+)? }
+  hexNumber { $[+-]? "0x" (hexDigit underHexDigit* ("." underHexDigit*)? | "." hexDigit underHexDigit*) }
+  number {hexNumber | decimalNumber}
 
   doubleQuotedString { ('"' | '@"') (!["\\] | "\\" _)* '"' }
 

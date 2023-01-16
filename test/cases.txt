@@ -44,6 +44,9 @@ Program(Identifier, Identifier, Identifier)
 -10.
 10.12
 0x10
+0xfa.a
+-0x10.1_a
+0x10e1_0
 
 ==>
 
@@ -60,7 +63,10 @@ Program(
   Number,
   Number,
   Number,
-  Number
+  Number,
+  Number,
+  Number,
+  Number,
   )
 
 # Incorrect ambiguities that I can't fix
