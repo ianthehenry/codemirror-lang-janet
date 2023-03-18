@@ -17,6 +17,8 @@ expression {
     @specialize<identifier,
     "import" | "import*" | "use" |
     "let" |
+    "do" | "upscope" |
+    "quote" | "quasiquote" | "unquote" | "splice" |
     "with" | "with-dyns" | "with-syms" | "with-vars" |
     "default" |
     "set" | "setdyn" |
